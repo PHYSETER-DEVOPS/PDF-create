@@ -10,5 +10,6 @@ app.use(cors({ origin: '*' }));
 
 // Routes
 app.use(require('./pdf.routes'));
+app.use(require('./table.routes'));
 
 module.exports = app;

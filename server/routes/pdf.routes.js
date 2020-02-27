@@ -71,7 +71,6 @@ Eiusmod qui excepteur nostrud ipsum sit non dolore consequat duis nostrud mollit
     });
 });
 
-
 /**
  * GET DOCUMENT
  */
