@@ -20,6 +20,10 @@ const PDFDocument = require('./../utils/pdf-table');
  * POST DOCUMENT WITH TABLES
  */
 app.post('/pdf/table', (req, res) => {
+    let content = `Officia enim aliquip labore elit dolor. Sint ut ea elit cillum do pariatur duis reprehenderit amet irure incididunt anim exercitation velit. Enim minim eiusmod in magna laboris magna cupidatat fugiat aliqua culpa.
+
+    In ullamco tempor exercitation labore ex laboris quis. Ad occaecat pariatur veniam fugiat cillum qui dolore commodo do elit sint cupidatat mollit. Incididunt qui veniam sint Lorem adipisicing in eiusmod dolore exercitation. Non laboris non commodo commodo aliqua enim officia nisi exercitation nostrud enim magna occaecat.\n\n`;
+
     // Content Table
     // Las cabeceras pueden ir predefinidas o igual puede ser generada en el FrontEnd o Backend
     let headers = ['MESES', 'FECHA', 'INTERESES', 'AMORTIZACIÓN', 'CUOTA\nVEHÍCULO', 'SEGURO\nVEHÍCULO', 'SEGURO\nDESGRAV', 'TOTAL\nPAGAR', 'SALDO PENDIENTE'];
@@ -38,11 +42,19 @@ app.post('/pdf/table', (req, res) => {
         headers,
         rows
     };
-
+    doc.fontSize(18)
+    .text('Tabla de Amortización', {
+        align: 'center'
+    });
+    doc.fontSize(12)
+    .text(content, {
+        align: 'justify'
+    });
     doc.table(table, {
         prepareHeader: () => doc.font('Helvetica-Bold').fontSize(6),
         prepareRow: (row, i) => doc.font('Helvetica').fontSize(7)
     });
+    doc.moveDown().table(table);
     doc.end();
 
     writeStream.on('finish', () => {
