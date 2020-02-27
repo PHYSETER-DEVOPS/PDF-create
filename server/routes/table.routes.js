@@ -54,7 +54,6 @@ app.post('/pdf/table', (req, res) => {
         prepareHeader: () => doc.font('Helvetica-Bold').fontSize(6),
         prepareRow: (row, i) => doc.font('Helvetica').fontSize(7)
     });
-    doc.moveDown().table(table);
     doc.end();
 
     writeStream.on('finish', () => {
